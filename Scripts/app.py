@@ -394,7 +394,7 @@ def pest_detection():
             return jsonify({"error": "Invalid image file"}), 400
             
         extension = image_file.filename.rsplit('.', 1)[1].lower()
-        if extension not in {'png', 'jpg', 'jpeg', 'gif'}:
+        if extension not in {'png', 'jpg', 'jpeg', 'gif', 'webp'}:
             return jsonify({"error": "File extension not allowed"}), 400
 
         try:
@@ -409,6 +409,13 @@ def pest_detection():
         prediction = PEST_MODEL.predict(image_array)
         predicted_class = np.argmax(prediction, axis=1)[0]
         confidence = float(np.max(prediction) * 100)
+
+        # Confidence threshold — reject non-crop/pest images
+        CONFIDENCE_THRESHOLD = 50.0
+        if confidence < CONFIDENCE_THRESHOLD:
+            return jsonify({
+                "error": f"This doesn't appear to be a valid crop or pest image. Please upload a clear photo of a crop leaf or pest. (Confidence: {round(confidence, 1)}%)"
+            }), 200
 
         # Get class names (if available)
         class_names = []

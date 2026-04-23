@@ -31,6 +31,17 @@ const usePestDetection = () => {
         setResponseData(null); // Clear previous response
     };
 
+    // Clear current file and results
+    const clearFile = () => {
+        if (preview) URL.revokeObjectURL(preview);
+        setSelectedFile(null);
+        setPreview(null);
+        setResponseData(null);
+        // Reset the file input so the same file can be re-selected
+        const input = document.getElementById('fileInput');
+        if (input) input.value = '';
+    };
+
     // Handle file upload
     const handleUpload = async () => {
         if (!selectedFile) {
@@ -63,7 +74,7 @@ const usePestDetection = () => {
         }
     };
 
-    return { selectedFile, preview, responseData, loading, handleChange, handleUpload };
+    return { selectedFile, preview, responseData, loading, handleChange, handleUpload, clearFile };
 };
 
 export default usePestDetection;

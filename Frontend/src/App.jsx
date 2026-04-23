@@ -6,6 +6,7 @@ import SoilAnalysis from "./Components/SoilAnalysis.jsx";
 import WeatherPrediction from "./Components/WeatherPrediction.jsx";
 import PestDetection from "./Components/PestDetection.jsx";
 import GovtSchemes from "./Components/GovtSchemes.jsx";
+import RippleCursor from "./components/ui/RippleCursor.jsx";
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
     ])
   return (
     <div>
+        <RippleCursor />
         <RouterProvider router={appRouter}>
         </RouterProvider>
     </div>
