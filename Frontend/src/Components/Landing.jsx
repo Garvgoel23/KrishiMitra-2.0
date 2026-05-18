@@ -62,7 +62,7 @@ const Landing = () => {
 
     return (
         <PageTransition>
-            <div className="min-h-screen flex flex-col bg-background font-sans overflow-x-hidden relative z-10">
+            <div className="min-h-screen flex flex-col bg-background font-sans overflow-x-hidden">
                 <Navbar />
                 
                 {/* Chatbot FAB */}
@@ -93,23 +93,10 @@ const Landing = () => {
                 </div>
 
                 {/* ===== HERO SECTION ===== */}
-                <section ref={heroRef} className="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
-                    {/* Video BG */}
-                    <motion.div className="absolute inset-0 z-0" style={{ y: heroY }}>
-                        <iframe 
-                            className="w-[200vw] h-[200vh] sm:w-[160vw] sm:h-[160vh] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-                            src="https://www.youtube.com/embed/kQWAXuP0pik?autoplay=1&mute=1&loop=1&controls=0&playlist=kQWAXuP0pik&showinfo=0&rel=0&modestbranding=1"
-                            title="video player"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
-                            referrerPolicy="strict-origin-when-cross-origin" 
-                        ></iframe>
-                        <div className="absolute inset-0 bg-black/55"></div>
-                        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/70"></div>
-                    </motion.div>
-
+                <section ref={heroRef} className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-green-950 via-green-800 to-green-700">
                     <motion.div 
                         style={{ opacity: heroOpacity }}
-                        className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto pt-20 pb-10"
+                        className="relative z-[1] text-center px-4 sm:px-6 max-w-4xl mx-auto pt-20 pb-10"
                     >
                         {/* Badge */}
                         <motion.div 
@@ -186,7 +173,7 @@ const Landing = () => {
                 </section>
 
                 {/* ===== STATS BAR ===== */}
-                <section className="relative z-10 -mt-12 sm:-mt-16 px-4 sm:px-6">
+                <section className="relative z-[1] -mt-12 sm:-mt-16 px-4 sm:px-6">
                     <motion.div 
                         initial={{ opacity: 0, y: 40 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -215,7 +202,7 @@ const Landing = () => {
                 </section>
 
                 {/* ===== FEATURES SECTION ===== */}
-                <section id="features" className="py-16 sm:py-24 px-4 sm:px-6 relative z-10">
+                <section id="features" className="py-16 sm:py-24 px-4 sm:px-6 relative z-[1]">
                     <div className="max-w-7xl mx-auto">
                         <motion.div 
                             initial={{ opacity: 0, y: 30 }}

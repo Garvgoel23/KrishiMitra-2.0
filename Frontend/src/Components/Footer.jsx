@@ -1,65 +1,57 @@
-import { FaPhoneAlt, FaEnvelope, FaFacebook, FaTwitter, FaInstagram, FaLeaf } from "react-icons/fa";
+import { FaPhoneAlt, FaEnvelope, FaGithub } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 const Footer = () => {
     return (
-        <footer className="w-full bg-primary text-primary-foreground py-10 sm:py-12 px-4 shadow-inner mt-auto relative overflow-hidden">
-            {/* Decorative floating circles */}
-            <div className="absolute top-0 left-0 w-40 h-40 bg-primary-foreground/5 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
-            <div className="absolute bottom-0 right-0 w-60 h-60 bg-primary-foreground/5 rounded-full translate-x-1/3 translate-y-1/3"></div>
+        <footer className="w-full bg-background text-foreground py-10 flex flex-col items-center justify-center space-y-3 mt-auto border-t border-border/20 shadow-inner">
+            {/* Logo Text */}
+            <motion.h1 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-6xl sm:text-7xl tracking-tight text-primary font-serif italic mb-2 hover:text-emerald-400 hover:drop-shadow-[0_0_12px_rgba(52,211,153,0.7)] transition-all duration-300 cursor-default"
+                style={{ fontFamily: "'Playfair Display', 'Georgia', serif" }}
+            >
+                KrishiMitra
+            </motion.h1>
 
-            <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 relative z-10">
-                {/* Brand */}
-                <div className="flex flex-col items-center sm:items-start text-center sm:text-left space-y-3 sm:space-y-4">
-                    <motion.div className="flex items-center gap-3" whileHover={{ scale: 1.03 }}>
-                        <div className="bg-primary-foreground/20 p-2 rounded-full">
-                            <FaLeaf className="w-5 h-5" />
-                        </div>
-                        <h2 className="text-xl sm:text-2xl font-bold tracking-tight">KrishiMitra</h2>
-                    </motion.div>
-                    <p className="text-xs sm:text-sm text-primary-foreground/75 max-w-xs">
-                        Empowering farmers with AI-driven insights for soil, weather, pest detection, and government schemes.
-                    </p>
-                </div>
+            {/* Subtitle */}
+            <p className="text-[13px] sm:text-sm text-muted-foreground/80 text-center px-4 max-w-md italic -mt-1">
+                AI-powered agricultural platform built with precision
+            </p>
 
-                {/* Contact */}
-                <div className="flex flex-col items-center sm:items-start text-center sm:text-left space-y-3 sm:space-y-4">
-                    <h3 className="text-sm sm:text-base font-semibold uppercase tracking-wider">Contact Us</h3>
-                    <div className="space-y-2 text-primary-foreground/85 text-xs sm:text-sm">
-                        <div className="flex items-center justify-center sm:justify-start gap-2 sm:gap-3">
-                            <FaPhoneAlt className="text-primary-foreground/60 flex-shrink-0" />
-                            <p>+91 98100 85872</p>
-                        </div>
-                        <div className="flex items-center justify-center sm:justify-start gap-2 sm:gap-3">
-                            <FaEnvelope className="text-primary-foreground/60 flex-shrink-0" />
-                            <p>support@krishimitra.in</p>
-                        </div>
-                    </div>
-                </div>
+            {/* Built by */}
+            <div className="flex items-center gap-1.5 text-[13px] text-muted-foreground mt-3">
+                <span>Built by</span>
+                <a href="https://github.com/Garvgoel23" target="_blank" rel="noopener noreferrer" className="flex items-center hover:scale-110 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300 cursor-pointer">
+                    <img src="https://github.com/Garvgoel23.png" alt="Garv Goel" className="w-6 h-6 rounded-full border border-border shadow-sm" />
+                </a>
+            </div>
+            
+            {/* Source Button */}
+            <motion.a 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                href="https://github.com/Garvgoel23/KrishiMitra-2.0" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 border border-border/60 bg-transparent hover:bg-muted text-foreground px-4 py-1.5 rounded-full text-xs font-medium transition-colors shadow-sm cursor-pointer mt-1"
+            >
+                <FaGithub className="w-3.5 h-3.5" /> Source
+            </motion.a>
 
-                {/* Social */}
-                <div className="flex flex-col items-center sm:items-start md:items-end space-y-3 sm:space-y-4">
-                    <h3 className="text-sm sm:text-base font-semibold uppercase tracking-wider">Follow Us</h3>
-                    <div className="flex gap-3 mt-1">
-                        {[FaFacebook, FaTwitter, FaInstagram].map((Icon, i) => (
-                            <motion.a
-                                key={i}
-                                href="#"
-                                className="bg-primary-foreground/10 hover:bg-primary-foreground/25 p-2.5 sm:p-3 rounded-full transition-colors"
-                                whileHover={{ scale: 1.15, rotate: 5 }}
-                                whileTap={{ scale: 0.9 }}
-                            >
-                                <Icon size={16} className="sm:w-5 sm:h-5" />
-                            </motion.a>
-                        ))}
-                    </div>
-                </div>
+            {/* Contact Info */}
+            <div className="flex flex-row items-center justify-center gap-5 sm:gap-8 text-xs text-muted-foreground pt-4">
+                <a href="tel:+919810085872" className="flex items-center gap-1.5 hover:text-primary transition-colors cursor-pointer">
+                    <FaPhoneAlt className="w-3 h-3 opacity-70" /> +91 98100 85872
+                </a>
+                <a href="mailto:goelgarv99@gmail.com" className="flex items-center gap-1.5 hover:text-primary transition-colors cursor-pointer">
+                    <FaEnvelope className="w-3 h-3 opacity-70" /> goelgarv99@gmail.com
+                </a>
             </div>
 
-            <div className="border-t border-primary-foreground/15 mt-8 sm:mt-10 pt-4 sm:pt-6 text-center relative z-10">
-                <p className="text-xs sm:text-sm text-primary-foreground/60">
-                    &copy; {new Date().getFullYear()} KrishiMitra. Cultivating the future, naturally.
-                </p>
+            {/* Copyright */}
+            <div className="text-[11px] text-muted-foreground/40 pt-2">
+                &copy; {new Date().getFullYear()} All rights reserved
             </div>
         </footer>
     );

@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import model from "../Utils/gemini.js";
+import ai from "../Utils/gemini.js";
 
 const AiSuggestions=({isAnswered,result,minerals})=>{
 
@@ -12,8 +12,11 @@ const AiSuggestions=({isAnswered,result,minerals})=>{
         const prompt=`Act as a soil fertility improvement model these are the quantity and the particular minerals  ${JSON.stringify(minerals)} and this is the result of fertility ${result} give suggestion/feedback
          based on the quantity and the result of the soil in strictly 20-30 words`
         console.log(prompt)
-        const res = await model.generateContent(prompt);
-        setMessage(res.response.text())
+        const res = await ai.models.generateContent({
+            model: "gemini-3-flash-preview",
+            contents: prompt
+        });
+        setMessage(res.text)
 
     }
     useEffect(()=>{

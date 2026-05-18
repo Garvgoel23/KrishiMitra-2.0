@@ -11,7 +11,7 @@ const ChatMessageBox = ({chatHistory,setChatHistory, generateBotReplies}) => {
         }
         setChatHistory((history)=> [...history,{role:"user" , text: userMessage}]);
         setTimeout(()=>{
-            setChatHistory((history) => [...history,{role:"bot" , text: "Analyzing...."}]);
+            setChatHistory((history) => [...history,{role:"model" , text: "Analyzing...."}]);
 
             generateBotReplies([...chatHistory,{role:"user" , text: userMessage}]);
         },600)
@@ -24,9 +24,11 @@ const ChatMessageBox = ({chatHistory,setChatHistory, generateBotReplies}) => {
             placeholder="Type a message..."
             value={message}
             onChange={(e) => setMessage(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleSendMessage(e)}
             className="flex-1 px-4 py-2 border border-gray-300 rounded-full text-black focus:outline-none focus:ring-2 focus:ring-green-400 bg-gray-100"
           />
           <button
+            type="button"
             className="ml-3 px-5 py-2.5 rounded-full shadow-md transition-all bg-gradient-to-r from-green-400 to-blue-500 text-white hover:from-green-500 hover:to-blue-600 hover:scale-105"
             onClick={(e) => handleSendMessage(e)}
           >

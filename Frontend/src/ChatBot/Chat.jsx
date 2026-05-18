@@ -2,6 +2,8 @@ import ChatMessageBox from "./ChatMessageBox.jsx";
 import {useEffect, useRef, useState} from "react";
 import Messages from "./Messages.jsx";
 
+import ai from "../Utils/gemini.js";
+
 const Chat = ({handleChatDisplay}) => {
     const [chatHistory, setChatHistory] = useState([{role: "model" , text: "Hi! How can i help?"}]);
     const chatBodyRef = useRef();
@@ -11,28 +13,23 @@ const Chat = ({handleChatDisplay}) => {
             setChatHistory(prev=> [...prev.filter(msg => msg.text !== "Analyzing...." ), {role:"model" , text}]);
         }
 
-        const formattedHistory = history.map(({ role, text }) => ({ role, parts: [{ text }] }));
-
-        const request = {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ contents: formattedHistory }),
-        };
+        // Gemini API requires the first message to be from the 'user' role
+        const apiHistory = history[0]?.role === "model" ? history.slice(1) : history;
+        const formattedHistory = apiHistory.map(({ role, text }) => ({ role, parts: [{ text }] }));
 
         try {
-            const response = await fetch(
-                "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyCWxueKaAmxBwbqE19PS0tOF5bcxEyvzcQ",
-                request
-            );
+            const currentDate = new Date().toDateString();
+            const systemInstruction = `You are KrishiMitra, an intelligent agricultural assistant. Today's date is ${currentDate}. Answer concisely and accurately. Ensure your responses are formatted cleanly using simple spacing and bullet points. Avoid using markdown bold (**) since the UI does not render it.`;
 
-            if (!response.ok) {
-                throw new Error(`Failed to fetch data: ${response.statusText}`);
-            }
+            const response = await ai.models.generateContent({
+                model: "gemini-3-flash-preview",
+                contents: formattedHistory,
+                config: {
+                    systemInstruction: systemInstruction,
+                }
+            });
 
-            const data = await response.json();
-            console.log(data);
-
-            const apiResponse = data?.candidates[0]?.content?.parts[0]?.text.replace(/\*\*(.*?)\*\*/g, "$1").trim();
+            const apiResponse = response.text.replace(/\*\*(.*?)\*\*/g, "$1").trim();
             updateHistory(apiResponse);
 
         } catch (e) {

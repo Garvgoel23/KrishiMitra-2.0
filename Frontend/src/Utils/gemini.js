@@ -1,9 +1,8 @@
-import  { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenAI } from "@google/genai";
 
+const ai = new GoogleGenAI({apiKey: "AIzaSyAUNDvQPZ7zbY8nXzB-69UDD04k3ZrAHYk"});
 
-const genAI = new GoogleGenerativeAI("AIzaSyAfx35VF3CKdHOAyEuQxP7RJwLKwdXLXX4");
-const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
-
+export default ai;
 
 // const testRun=async ()=>{
 //     const prompt="hello gemini "
@@ -13,5 +12,4 @@ const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 // testRun();
 // console.log(import.meta.env)
 
-export default model
 
